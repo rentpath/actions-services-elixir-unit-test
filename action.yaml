@@ -1,0 +1,21 @@
+name: Elixir Unit Test
+inputs:
+  elixir-version:
+    required: true
+    type: string
+  erlang-version:
+    required: true
+    type: string
+runs:
+  using: composite
+  steps:
+    - uses: rentpath/actions-services-elixir-deps@v1
+      with:
+        elixir-version: ${{ inputs.elixir-version }}
+        erlang-version: ${{ inputs.erlang-version }}
+        mix-env: test
+    - name: Unit Test
+      env:
+        MIX_ENV: test
+      run: mix do compile --force, credo --strict, test, clean
+      shell: bash
