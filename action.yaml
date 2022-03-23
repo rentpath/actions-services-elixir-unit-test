@@ -6,6 +6,13 @@ inputs:
   erlang-version:
     required: true
     type: string
+# using a string because booleans currently converted to strings
+# within workflow dispatches and composite actions
+# https://github.com/actions/runner/issues/1483
+  skip-checkout:
+    required: false
+    default: 'false'
+    type: string
 runs:
   using: composite
   steps:
@@ -14,6 +21,7 @@ runs:
         elixir-version: ${{ inputs.elixir-version }}
         erlang-version: ${{ inputs.erlang-version }}
         mix-env: test
+        skip-checkout: ${{ inputs.skip-checkout }}
     - name: Unit Test
       env:
         MIX_ENV: test
