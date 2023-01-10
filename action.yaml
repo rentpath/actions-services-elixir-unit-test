@@ -6,6 +6,11 @@ inputs:
   erlang-version:
     required: true
     type: string
+  github-token:
+    description: 'Optionally rewrite all GitHub URLs to authenticate with a personal access token.'
+    required: false
+    default: 'false'
+    type: string
 # using a string because booleans currently converted to strings
 # within workflow dispatches and composite actions
 # https://github.com/actions/runner/issues/1483
@@ -20,6 +25,7 @@ runs:
       with:
         elixir-version: ${{ inputs.elixir-version }}
         erlang-version: ${{ inputs.erlang-version }}
+        github-token: ${{ inputs.github-token }}
         mix-env: test
         skip-checkout: ${{ inputs.skip-checkout }}
     - name: Unit Test
