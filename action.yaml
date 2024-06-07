@@ -6,6 +6,11 @@ inputs:
   erlang-version:
     required: true
     type: string
+  github-repository:
+    description: 'Optionally specify the repository against which to authenticate. Must be included if the `github-token` option is used.'
+    required: false
+    default: 'false'
+    type: string
   github-token:
     description: 'Optionally rewrite all GitHub URLs to authenticate with a personal access token.'
     required: false
@@ -21,10 +26,11 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: rentpath/actions-services-elixir-deps@v1
+    - uses: rentpath/actions-services-elixir-deps@v1.6.0
       with:
         elixir-version: ${{ inputs.elixir-version }}
         erlang-version: ${{ inputs.erlang-version }}
+        github-repository: ${{ inputs.github-repository }}
         github-token: ${{ inputs.github-token }}
         mix-env: test
         skip-checkout: ${{ inputs.skip-checkout }}
