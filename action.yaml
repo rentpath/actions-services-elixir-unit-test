@@ -26,7 +26,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: rentpath/actions-services-elixir-deps@v1.6.0
+    - uses: rentpath/actions-services-elixir-deps@v1.6.1
       with:
         elixir-version: ${{ inputs.elixir-version }}
         erlang-version: ${{ inputs.erlang-version }}
