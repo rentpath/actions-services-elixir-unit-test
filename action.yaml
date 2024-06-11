@@ -11,8 +11,13 @@ inputs:
     required: false
     default: 'false'
     type: string
-  github-token:
-    description: 'Optionally rewrite all GitHub URLs to authenticate with a personal access token.'
+  app-installation-id:
+    description: 'Optionally rewrite all GitHub URLs to authenticate with an app-generated token.'
+    required: false
+    default: 'false'
+    type: string
+  app-installation-key:
+    description: 'Optionally rewrite all GitHub URLs to authenticate with an app-generated token.'
     required: false
     default: 'false'
     type: string
@@ -26,12 +31,13 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: rentpath/actions-services-elixir-deps@v1.6.3
+    - uses: rentpath/actions-services-elixir-deps@v1.6.4
       with:
         elixir-version: ${{ inputs.elixir-version }}
         erlang-version: ${{ inputs.erlang-version }}
         github-repository: ${{ inputs.github-repository }}
-        github-token: ${{ inputs.github-token }}
+        app-installation-id: ${{ inputs.app-installation-id }}
+        app-installation-key: ${{ inputs.app-installation-key }}
         mix-env: test
         skip-checkout: ${{ inputs.skip-checkout }}
     - name: Unit Test
