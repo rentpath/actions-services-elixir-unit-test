@@ -6,11 +6,6 @@ inputs:
   erlang-version:
     required: true
     type: string
-  github-repository:
-    description: 'Optionally specify the repository against which to authenticate. Must be included if the `github-token` option is used.'
-    required: false
-    default: 'false'
-    type: string
   app-installation-id:
     description: 'Optionally rewrite all GitHub URLs to authenticate with an app-generated token.'
     required: false
@@ -31,11 +26,10 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: rentpath/actions-services-elixir-deps@v1
+    - uses: rentpath/actions-services-elixir-deps@v2
       with:
         elixir-version: ${{ inputs.elixir-version }}
         erlang-version: ${{ inputs.erlang-version }}
-        github-repository: ${{ inputs.github-repository }}
         app-installation-id: ${{ inputs.app-installation-id }}
         app-installation-key: ${{ inputs.app-installation-key }}
         mix-env: test
